@@ -9,12 +9,13 @@ import 'package:flame/game.dart';
 
 class MyGame extends Game with TapDetector {
   Size screenSize;
+  int playNowIndex;
   List<Player> sides;
   GameMap myMap;
   List<Color> myColors =
       new List<Color>.filled(2, Colors.black87, growable: true);
 
-  MyGame({@required this.sides}) {
+  MyGame({@required this.sides, this.playNowIndex = 0}) {
     myColors[0] = Colors.black87;
     myColors[1] = Colors.lime;
     for (var i = 0; i < sides.length; i++) {
@@ -22,6 +23,10 @@ class MyGame extends Game with TapDetector {
     }
     myMap = new GameMap(colors: myColors);
     myMap.createMap();
+  }
+
+  void setPlayNowIndex(int index) {
+    this.playNowIndex = index;
   }
 
   void render(Canvas canvas) {
@@ -43,7 +48,7 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
-    myMap.tap(d.localPosition.dx, d.localPosition.dy, 4);
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex);
   }
 
   @override
