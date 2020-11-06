@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/services.dart';
-import 'package:map_game/pages/HomePage.dart';
+import 'package:map_game/pages/GameWrapper.dart';
+import 'package:map_game/pages/WelcomePage.dart';
 import 'game/myGame.dart';
 import './models/player.dart';
 import './utilities/constant.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lime,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(child: myGame.widget),
+      home: WelcomePage(),
     );
   }
 }

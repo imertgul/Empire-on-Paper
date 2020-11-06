@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../models/player.dart';
-import '../utilities/constant.dart';
 import '../models/gameMap.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';

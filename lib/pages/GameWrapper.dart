@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utilities/constant.dart';
-import '../utilities/constant.dart';
 
-class HomePage extends StatefulWidget {
+class GameWrapper extends StatefulWidget {
   final Widget child;
-  HomePage({this.child});
+  GameWrapper({this.child});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _GameWrapperState createState() => _GameWrapperState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GameWrapperState extends State<GameWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
