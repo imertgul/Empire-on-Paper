@@ -8,8 +8,7 @@ class GameMap {
   double width;
   double height;
   double resolution;
-  Color colorEmpty;
-  Color colorFill;
+  List<Color> colors;
   var map;
   GameMap({
     this.row = 10,
@@ -18,8 +17,7 @@ class GameMap {
     this.height = 20,
     this.width = 20,
     this.resolution = 20,
-    this.colorEmpty = Colors.lime,
-    this.colorFill = Colors.black87,
+    @required this.colors,
   });
 
   void createMap({fill}) {
@@ -29,7 +27,6 @@ class GameMap {
         map[i][j] = fill != null ? fill : Random().nextInt(2);
       }
     }
-    print(map);
   }
 
   void draw(canvas) {
@@ -38,14 +35,14 @@ class GameMap {
         Rect bgRect =
             Rect.fromLTWH(i * resolution, j * resolution, width, height);
         Paint bgPaint = Paint();
-        bgPaint.color = map[i][j] == 1 ? colorFill : colorEmpty;
+        bgPaint.color = colors[map[i][j]];
         canvas.drawRect(bgRect, bgPaint);
       }
     }
   }
 
-  void tap(double dx, double dy) {
+  void tap(double dx, double dy, int tapper) {
     map[((dx - (dx % resolution)) / resolution).ceil()]
-        [((dy - (dy % resolution)) / resolution).ceil()] ^= 1;
+        [((dy - (dy % resolution)) / resolution).ceil()] = tapper;
   }
 }
