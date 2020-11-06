@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/player.dart';
+import '../utilities/constant.dart';
+import '../utilities/constant.dart';
 
 class HomePage extends StatefulWidget {
   final Widget child;
@@ -24,12 +25,21 @@ class _HomePageState extends State<HomePage> {
             child: widget.child),
       ),
       floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context)),
-          IconButton(icon: Icon(Icons.menu), onPressed: null),
+          FlatButton(
+              onPressed: () => myGame.setPlayNowIndex(0), child: Text("0")),
+          FlatButton(
+              onPressed: () => myGame.setPlayNowIndex(1), child: Text("1")),
+          FlatButton(
+              onPressed: () => myGame.setPlayNowIndex(2), child: Text("2")),
+          FlatButton(
+              onPressed: () => myGame.setPlayNowIndex(3), child: Text("3")),
+          FlatButton(
+              onPressed: () => myGame.setPlayNowIndex(4), child: Text("4")),
         ],
       ),
     );
