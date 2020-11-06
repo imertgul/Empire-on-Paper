@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:map_game/pages/HomePage.dart';
 import 'game/myGame.dart';
 import './models/player.dart';
+import './utilities/constant.dart';
 
 List<Player> sides = new List<Player>(3);
-MyGame game;
 void initialize() {
   sides[0] = new Player(name: "Alliance", color: Colors.blue);
   sides[1] = new Player(name: "Horde", color: Colors.red);
   sides[2] = new Player(name: "Pandas", color: Colors.green);
-  game = MyGame(sides: sides);
+  myGame = MyGame(sides: sides);
 }
 
 void main() async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lime,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(child: game.widget),
+      home: HomePage(child: myGame.widget),
     );
   }
 }

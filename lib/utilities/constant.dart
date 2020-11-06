@@ -1,1 +1,3 @@
-import 'dart:convert';
+import '../game/myGame.dart';
+
+MyGame myGame;
