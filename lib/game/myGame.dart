@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-
+import '../models/player.dart';
 import '../utilities/constant.dart';
 import '../models/gameMap.dart';
 import 'package:flame/gestures.dart';
@@ -9,9 +9,18 @@ import 'package:flame/game.dart';
 
 class MyGame extends Game with TapDetector {
   Size screenSize;
-  GameMap myMap = new GameMap();
+  List<Player> sides;
+  GameMap myMap;
+  List<Color> myColors =
+      new List<Color>.filled(2, Colors.black87, growable: true);
 
-  MyGame() {
+  MyGame({@required this.sides}) {
+    myColors[0] = Colors.black87;
+    myColors[1] = Colors.lime;
+    for (var i = 0; i < sides.length; i++) {
+      myColors.add(sides[i].color);
+    }
+    myMap = new GameMap(colors: myColors);
     myMap.createMap();
   }
 
@@ -34,8 +43,7 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
-    // print(d.localPosition);
-    myMap.tap(d.localPosition.dx, d.localPosition.dy);
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, 4);
   }
 
   @override
