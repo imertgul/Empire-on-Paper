@@ -34,14 +34,8 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
-    double screenCenterX = screenSize.width / 2;
-    double screenCenterY = screenSize.height / 2;
-    if (d.globalPosition.dx >= screenCenterX - 75 &&
-        d.globalPosition.dx <= screenCenterX + 75 &&
-        d.globalPosition.dy >= screenCenterY - 75 &&
-        d.globalPosition.dy <= screenCenterY + 75) {
-      print("specified area clicked");
-    }
+    // print(d.localPosition);
+    myMap.tap(d.localPosition.dx, d.localPosition.dy);
   }
 
   @override
