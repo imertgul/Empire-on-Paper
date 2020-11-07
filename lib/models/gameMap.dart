@@ -7,20 +7,24 @@ class GameMap {
   int col;
   double width;
   double height;
-  double resolution;
+  Size screenSize;
   List<Color> colors;
   var map;
   GameMap({
-    this.row = 10,
+    this.row = 30,
     this.col = 10,
     this.map,
-    this.height = 20,
-    this.width = 20,
-    this.resolution = 20,
+    this.height,
+    this.width,
+    @required this.screenSize,
     @required this.colors,
-  });
+  }) {
+    print(screenSize);
+    height = screenSize.width / col;
+    width = screenSize.height / row;
+  }
 
-  void createMap({fill}) {
+  void createMap({int fill}) {
     map = List.generate(row, (i) => List(col), growable: false);
     for (var i = 0; i < row; i++) {
       for (var j = 0; j < col; j++) {
@@ -32,8 +36,7 @@ class GameMap {
   void draw(canvas) {
     for (var i = 0; i < row; i++) {
       for (var j = 0; j < col; j++) {
-        Rect bgRect =
-            Rect.fromLTWH(i * resolution, j * resolution, width, height);
+        Rect bgRect = Rect.fromLTWH(i * width, j * height, width, height);
         Paint bgPaint = Paint();
         bgPaint.color = colors[map[i][j]];
         canvas.drawRect(bgRect, bgPaint);
@@ -42,7 +45,7 @@ class GameMap {
   }
 
   void tap(double dx, double dy, int tapper) {
-    map[((dx - (dx % resolution)) / resolution).ceil()]
-        [((dy - (dy % resolution)) / resolution).ceil()] = tapper;
+    map[((dx - (dx % width)) / width).ceil()]
+        [((dy - (dy % height)) / height).ceil()] = tapper;
   }
 }
