@@ -5,6 +5,7 @@ import '../models/gameMap.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
+import '../utilities/constant.dart';
 
 class MyGame extends Game with TapDetector {
   Size screenSize;
@@ -20,8 +21,12 @@ class MyGame extends Game with TapDetector {
     for (var i = 0; i < sides.length; i++) {
       myColors.add(sides[i].color);
     }
-    myMap = new GameMap(colors: myColors);
-    myMap.createMap();
+    myMap = new GameMap(
+        colors: myColors,
+        row: mapSettings['row'],
+        col: mapSettings['col'],
+        screenSize: new Size(mapSettings['width'], mapSettings['height']));
+    myMap.createMap(fill: 1);
   }
 
   void setPlayNowIndex(int index) {
