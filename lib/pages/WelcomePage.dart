@@ -1,9 +1,10 @@
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:map_game/models/player.dart';
-import 'package:o_popup/o_popup.dart';
-import 'package:o_color_picker/o_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:map_game/widgets/PlayerSetting.dart';
 import '../utilities/constant.dart';
+import '../game/myGame.dart';
+import '../models/player.dart';
 import 'GameWrapper.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -12,28 +13,13 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  int players = 2;
+  int numbOfPlayers = 2;
   Color selectedColor = Colors.lime;
-  List<Player> myPlayers =
-      new List<Player>.filled(1, Player(name: "Player 1", color: Colors.red));
-
-  Widget colorPicker(int index) {
-    return OPopupTrigger(
-      barrierAnimationDuration: Duration(milliseconds: 400),
-      triggerWidget:
-          Container(color: selectedColor, child: Icon(Icons.colorize)),
-      popupContent: OColorPicker(
-        selectedColor: myPlayers[index].color,
-        colors: primaryColorsPalette,
-        onColorChange: (color) {
-          setState(() {
-            myPlayers[index].color = color;
-          });
-          Navigator.of(context).pop();
-        },
-      ),
-    );
-  }
+  List<Player> myPlayers = new List<Player>.filled(
+    2,
+    Player(name: "Player 1", color: Colors.red),
+    growable: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +35,31 @@ class _WelcomePageState extends State<WelcomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SpinBox(
-                      min: 1,
+                      min: 2,
                       max: 10,
-                      value: 1,
+                      value: numbOfPlayers.toDouble(),
                       decoration:
                           InputDecoration(labelText: 'Number of Players'),
                       onChanged: (value) {
                         setState(() {
-                          players = value.toInt();
+                          numbOfPlayers = value.toInt();
                         });
+                        myPlayers = new List<Player>.filled(
+                          numbOfPlayers,
+                          Player(name: "Player 1", color: Colors.red),
+                          growable: true,
+                        );
                       },
                     ),
                     ElevatedButton(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  GameWrapper(child: myGame.widget))),
+                      onPressed: () {
+                        myGame = new MyGame(sides: myPlayers);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    GameWrapper(child: myGame.widget)));
+                      },
                       child: Text("Start"),
                     ),
                     SizedBox(height: 10.0),
@@ -75,11 +69,14 @@ class _WelcomePageState extends State<WelcomePage> {
               Expanded(
                 child: ListView.builder(
                     padding: const EdgeInsets.all(10),
-                    itemCount: players,
+                    itemCount: numbOfPlayers,
                     itemBuilder: (BuildContext context, int index) {
-                      myPlayers = new List<Player>.filled(index,
-                          Player(name: "Player $index", color: Colors.red));
-                      return colorPicker(index);
+                      return PlayerSetter(
+                        index: index,
+                        onColorSelected: (player) {
+                          myPlayers[index] = player;
+                        },
+                      );
                     }),
               )
             ],
