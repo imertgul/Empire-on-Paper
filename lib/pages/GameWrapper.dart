@@ -40,7 +40,7 @@ class _GameWrapperState extends State<GameWrapper> {
                     zar = Random().nextInt(6);
                   });
                 },
-                child: Text("Zar At: $zar"),
+                child: Text("Zar At: ${zar > 3 ? "başarılı" : "Kaybettin"}"),
               ),
             ),
             Align(
