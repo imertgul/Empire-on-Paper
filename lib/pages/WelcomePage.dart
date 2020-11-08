@@ -42,22 +42,25 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SpinBox(
-                      min: 2,
-                      max: 10,
-                      value: numbOfPlayers.toDouble(),
-                      decoration:
-                          InputDecoration(labelText: 'Number of Players'),
-                      onChanged: (value) {
-                        setState(() {
-                          numbOfPlayers = value.toInt();
-                        });
-                        myPlayers = new List<Player>.filled(
-                          numbOfPlayers,
-                          Player(name: "Player 1", color: Colors.red),
-                          growable: true,
-                        );
-                      },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 75.0),
+                      child: SpinBox(
+                        min: 2,
+                        max: 10,
+                        value: numbOfPlayers.toDouble(),
+                        decoration:
+                            InputDecoration(labelText: 'Number of Players'),
+                        onChanged: (value) {
+                          setState(() {
+                            numbOfPlayers = value.toInt();
+                          });
+                          myPlayers = new List<Player>.filled(
+                            numbOfPlayers,
+                            Player(name: "Player 1", color: Colors.red),
+                            growable: true,
+                          );
+                        },
+                      ),
                     ),
                     ElevatedButton(
                       onPressed: () {
