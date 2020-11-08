@@ -53,8 +53,13 @@ class GameMap {
     }
   }
 
-  void tap(double dx, double dy, int tapper) {
-    map[((dx - (dx % width)) / width).ceil()]
-        [((dy - (dy % height)) / height).ceil()] = tapper;
+  bool tap(double dx, double dy, int tapper, {int base, int alliance}) {
+    int i = ((dx - (dx % width)) / width).ceil();
+    int j = ((dy - (dy % height)) / height).ceil();
+    if (map[i][j] != base && map[i][j] != alliance) {
+      map[i][j] = tapper;
+      return true;
+    } else
+      return false;
   }
 }

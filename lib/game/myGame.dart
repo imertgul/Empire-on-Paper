@@ -61,7 +61,7 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapDown(TapDownDetails d) {
     print("tap down");
-    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex);
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex, base: 0);
   }
 
   @override
