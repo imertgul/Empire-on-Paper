@@ -21,7 +21,7 @@ class _GameWrapperState extends State<GameWrapper> {
         child: Stack(
           children: [
             InteractiveViewer(
-              minScale: 1,
+              minScale: 0.5,
               maxScale: 5,
               boundaryMargin: EdgeInsets.all(double.infinity),
               child: widget.child,
