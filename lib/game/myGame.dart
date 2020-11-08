@@ -27,8 +27,9 @@ class MyGame extends Game with TapDetector {
         row: mapSettings['row'],
         col: mapSettings['col'],
         screenSize: new Size(mapSettings['width'], mapSettings['height']));
-    myMap.createMap(fill: 1);
-    mapSettings['map'] = myMap.map;
+    // myMap.createMap(fill: 1);
+    myMap.setMap(import: mapSettings['map']);
+    // myMap.map = mapSettings['map'];
     print(jsonEncode(mapSettings));
   }
 

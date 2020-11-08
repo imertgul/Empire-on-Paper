@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:map_game/models/player.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +23,11 @@ class _WelcomePageState extends State<WelcomePage> {
   );
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    mapSettings["width"] = MediaQuery.of(context).size.height;
-    mapSettings["height"] = MediaQuery.of(context).size.width;
+    //initialize map settings from json and set the screen after
+    mapSettings = jsonDecode(mapSettingsJson);
+    mapSettings["width"] = MediaQuery.of(context).size.width;
+    mapSettings["height"] = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -65,6 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     ElevatedButton(
                       onPressed: () {
                         myGame = new MyGame(sides: myPlayers);
+                        //STARTS THE GAME
                         Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -20,8 +20,8 @@ class GameMap {
     @required this.colors,
   }) {
     print(screenSize);
-    height = screenSize.width / col;
-    width = screenSize.height / row;
+    height = screenSize.height / col;
+    width = screenSize.width / row;
   }
 
   void createMap({int fill}) {
@@ -29,6 +29,15 @@ class GameMap {
     for (var i = 0; i < row; i++) {
       for (var j = 0; j < col; j++) {
         map[i][j] = fill != null ? fill : Random().nextInt(2);
+      }
+    }
+  }
+
+  void setMap({var import}) {
+    map = List.generate(row, (i) => List(col), growable: false);
+    for (var i = 0; i < row; i++) {
+      for (var j = 0; j < col; j++) {
+        map[i][j] = import[i][j];
       }
     }
   }
