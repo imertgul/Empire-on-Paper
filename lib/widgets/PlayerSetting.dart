@@ -20,20 +20,34 @@ class _PlayerSetterState extends State<PlayerSetter> {
   Widget build(BuildContext context) {
     return OPopupTrigger(
       barrierAnimationDuration: Duration(milliseconds: 400),
-      triggerWidget:
-          Container(color: selectedColor, child: Icon(Icons.colorize)),
+      triggerWidget: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: selectedColor,
+            ),
+            child: Icon(
+              Icons.colorize,
+            )),
+      ),
       popupContent: Center(
-        child: OColorPicker(
-          selectedColor: selectedColor,
-          colors: primaryColorsPalette,
-          onColorChange: (color) {
-            setState(() {
-              selectedColor = color;
-              widget.onColorSelected(
-                  new Player(name: "Player ${widget.index}", color: color));
-            });
-            Navigator.of(context).pop();
-          },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 100),
+          child: OColorPicker(
+            selectedColor: selectedColor,
+            colors: primaryColorsPalette,
+            onColorChange: (color) {
+              setState(() {
+                selectedColor = color;
+                widget.onColorSelected(
+                    new Player(name: "Player ${widget.index}", color: color));
+              });
+              Navigator.of(context).pop();
+            },
+          ),
         ),
       ),
     );
