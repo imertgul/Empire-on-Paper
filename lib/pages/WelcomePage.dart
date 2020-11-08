@@ -25,12 +25,12 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    mapSettings["width"] = MediaQuery.of(context).size.width;
-    mapSettings["height"] = MediaQuery.of(context).size.height;
   }
 
   @override
   Widget build(BuildContext context) {
+    mapSettings["width"] = MediaQuery.of(context).size.height;
+    mapSettings["height"] = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Container(
