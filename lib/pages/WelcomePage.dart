@@ -24,10 +24,9 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //initialize map settings from json and set the screen after
-    mapSettings = jsonDecode(mapSettingsJson);
-    mapSettings["width"] = MediaQuery.of(context).size.width;
-    mapSettings["height"] = MediaQuery.of(context).size.height;
+    //initialize screen settings
+    myScreen = new Size(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     return Scaffold(
       body: SafeArea(
         child: Container(

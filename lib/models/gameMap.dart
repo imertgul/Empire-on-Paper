@@ -34,6 +34,8 @@ class GameMap {
   }
 
   void setMap({var import}) {
+    col = import[0].length;
+    row = import.length;
     map = List.generate(row, (i) => List(col), growable: false);
     for (var i = 0; i < row; i++) {
       for (var j = 0; j < col; j++) {
