@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../models/player.dart';
@@ -27,6 +28,8 @@ class MyGame extends Game with TapDetector {
         col: mapSettings['col'],
         screenSize: new Size(mapSettings['width'], mapSettings['height']));
     myMap.createMap(fill: 1);
+    mapSettings['map'] = myMap.map;
+    print(jsonEncode(mapSettings));
   }
 
   void setPlayNowIndex(int index) {
@@ -52,12 +55,12 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
-    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex);
   }
 
   @override
   void onTapDown(TapDownDetails d) {
     print("tap down");
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex);
   }
 
   @override
