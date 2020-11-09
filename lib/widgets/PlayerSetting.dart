@@ -7,14 +7,21 @@ typedef OnColorSelected = void Function(Player);
 
 class PlayerSetter extends StatefulWidget {
   final int index;
+  final Color color;
   final OnColorSelected onColorSelected;
-  PlayerSetter({@required this.index, this.onColorSelected});
+  PlayerSetter(
+      {@required this.index, @required this.color, this.onColorSelected});
   @override
   _PlayerSetterState createState() => _PlayerSetterState();
 }
 
 class _PlayerSetterState extends State<PlayerSetter> {
-  Color selectedColor = Colors.white;
+  Color selectedColor;
+  @override
+  void initState() {
+    super.initState();
+    selectedColor = widget.color;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +49,8 @@ class _PlayerSetterState extends State<PlayerSetter> {
             onColorChange: (color) {
               setState(() {
                 selectedColor = color;
-                widget.onColorSelected(
-                    new Player(name: "Player ${widget.index}", color: color));
+                widget.onColorSelected(new Player(
+                    name: "Player ${widget.index + 1}", color: color));
               });
               Navigator.of(context).pop();
             },
