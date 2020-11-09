@@ -16,11 +16,14 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   int numbOfPlayers = 2;
   Color selectedColor = Colors.lime;
-  List<Player> myPlayers = new List<Player>.filled(
-    2,
-    Player(name: "Player 1", color: Colors.red),
-    growable: true,
-  );
+  List<Player> myPlayers = new List<Player>();
+
+  @override
+  void initState() {
+    super.initState();
+    myPlayers.add(Player(name: "Player 1", color: Colors.red));
+    myPlayers.add(Player(name: "Player 2", color: Colors.blue));
+  }
 
   @override
   Widget build(BuildContext context) {
