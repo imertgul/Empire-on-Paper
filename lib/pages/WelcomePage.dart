@@ -16,11 +16,16 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   int numbOfPlayers = 2;
   Color selectedColor = Colors.lime;
-  List<Player> myPlayers = new List<Player>();
+  List<Player> myPlayers;
 
   @override
   void initState() {
     super.initState();
+    initPlayers();
+  }
+
+  void initPlayers() {
+    myPlayers = new List<Player>();
     myPlayers.add(Player(name: "Player 1", color: Colors.red));
     myPlayers.add(Player(name: "Player 2", color: Colors.blue));
   }
@@ -51,13 +56,13 @@ class _WelcomePageState extends State<WelcomePage> {
                             InputDecoration(labelText: 'Number of Players'),
                         onChanged: (value) {
                           setState(() {
+                            initPlayers();
                             numbOfPlayers = value.toInt();
                           });
-                          myPlayers = new List<Player>.filled(
-                            numbOfPlayers,
-                            Player(name: "Player 1", color: Colors.red),
-                            growable: true,
-                          );
+                          for (var i = 2; i < numbOfPlayers; i++) {
+                            myPlayers.add(new Player(
+                                name: "Player ${i + 1}", color: Colors.red));
+                          }
                         },
                       ),
                     ),
@@ -84,6 +89,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     itemBuilder: (BuildContext context, int index) {
                       return PlayerSetter(
                         index: index,
+                        color: myPlayers[index].color,
                         onColorSelected: (player) {
                           myPlayers[index] = player;
                         },
