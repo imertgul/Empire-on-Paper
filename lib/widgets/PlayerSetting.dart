@@ -14,7 +14,7 @@ class PlayerSetter extends StatefulWidget {
 }
 
 class _PlayerSetterState extends State<PlayerSetter> {
-  Color selectedColor = Colors.red;
+  Color selectedColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {

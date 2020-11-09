@@ -28,6 +28,7 @@ class MyGame extends Game with TapDetector {
   }
 
   void setPlayNowIndex(int index) {
+    print("Playing index: $index");
     this.playNowIndex = index;
   }
 
