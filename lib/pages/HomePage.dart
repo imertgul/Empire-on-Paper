@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Work in progress",
+                  "Work in progress ver:0.1",
                 ),
               ),
             ),
@@ -112,17 +112,17 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    FlatButton(
-                      color: Colors.black87,
-                      splashColor: Colors.lime,
-                      height: 150,
-                      minWidth: 150,
-                      onPressed: () => print("object"),
-                      child: Text(
-                        'Sandbox',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    // FlatButton(
+                    //   color: Colors.black87,
+                    //   splashColor: Colors.lime,
+                    //   height: 150,
+                    //   minWidth: 150,
+                    //   onPressed: () => print("object"),
+                    //   child: Text(
+                    //     'Sandbox',
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
