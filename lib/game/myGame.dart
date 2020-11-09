@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../models/player.dart';
@@ -21,15 +22,13 @@ class MyGame extends Game with TapDetector {
     for (var i = 0; i < sides.length; i++) {
       myColors.add(sides[i].color);
     }
-    myMap = new GameMap(
-        colors: myColors,
-        row: mapSettings['row'],
-        col: mapSettings['col'],
-        screenSize: new Size(mapSettings['width'], mapSettings['height']));
-    myMap.createMap(fill: 1);
+    myMap = new GameMap(colors: myColors, screenSize: myScreen);
+    // myMap.createMap(fill: 1); //or leave blank to random
+    myMap.setMap(import: jsonDecode(mapSettingsJson)['map']);
   }
 
   void setPlayNowIndex(int index) {
+    print("Playing index: $index");
     this.playNowIndex = index;
   }
 
@@ -52,12 +51,12 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
-    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex);
   }
 
   @override
   void onTapDown(TapDownDetails d) {
     print("tap down");
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex, base: 0);
   }
 
   @override

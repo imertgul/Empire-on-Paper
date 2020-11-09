@@ -20,8 +20,8 @@ class GameMap {
     @required this.colors,
   }) {
     print(screenSize);
-    height = screenSize.width / col;
-    width = screenSize.height / row;
+    height = screenSize.height / col;
+    width = screenSize.width / row;
   }
 
   void createMap({int fill}) {
@@ -29,6 +29,17 @@ class GameMap {
     for (var i = 0; i < row; i++) {
       for (var j = 0; j < col; j++) {
         map[i][j] = fill != null ? fill : Random().nextInt(2);
+      }
+    }
+  }
+
+  void setMap({var import}) {
+    col = import[0].length;
+    row = import.length;
+    map = List.generate(row, (i) => List(col), growable: false);
+    for (var i = 0; i < row; i++) {
+      for (var j = 0; j < col; j++) {
+        map[i][j] = import[i][j];
       }
     }
   }
@@ -44,8 +55,13 @@ class GameMap {
     }
   }
 
-  void tap(double dx, double dy, int tapper) {
-    map[((dx - (dx % width)) / width).ceil()]
-        [((dy - (dy % height)) / height).ceil()] = tapper;
+  bool tap(double dx, double dy, int tapper, {int base, int alliance}) {
+    int i = ((dx - (dx % width)) / width).ceil();
+    int j = ((dy - (dy % height)) / height).ceil();
+    if (map[i][j] != base && map[i][j] != alliance) {
+      map[i][j] = tapper;
+      return true;
+    } else
+      return false;
   }
 }

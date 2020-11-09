@@ -1,7 +1,7 @@
 name: map_game
 description: A new Flutter project.
 
-# The following line prevents the package from being accidentally published to
+# Th efollowing line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  carousel_slider: ^2.3.1
   flutter_spinbox: ^0.2.1
   o_color_picker: ^0.1.0
   o_popup: ^0.1.4
