@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/services.dart';
-import 'package:map_game/pages/WelcomePage.dart';
+import 'package:map_game/pages/HomePage.dart';
 
 void main() async {
   Util flameUtil = Util();
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: HomePage(),
     );
   }
 }

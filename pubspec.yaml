@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  carousel_slider: ^2.3.1
   flutter_spinbox: ^0.2.1
   o_color_picker: ^0.1.0
   o_popup: ^0.1.4
