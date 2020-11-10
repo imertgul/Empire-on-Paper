@@ -47,22 +47,36 @@ class _LobbyPageState extends State<LobbyPage> {
                   icon: Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(context)),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200),
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(10),
-                  itemCount: numbOfPlayers,
-                  itemBuilder: (BuildContext context, int index) {
-                    return PlayerSetter(
-                      index: index,
-                      color: myPlayers[index].color,
-                      onColorSelected: (player) {
-                        myPlayers[index] = player;
+            Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(children: [
+                      Text("Import a Map"),
+                      TextField(
+                        onChanged: (value) {
+                          mapSettingsJson = value;
+                        },
+                      ),
+                    ]),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(10),
+                      itemCount: numbOfPlayers,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PlayerSetter(
+                          index: index,
+                          color: myPlayers[index].color,
+                          onColorSelected: (player) {
+                            myPlayers[index] = player;
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Align(
@@ -70,7 +84,8 @@ class _LobbyPageState extends State<LobbyPage> {
               child: ElevatedButton(
                 onPressed: () {
                   //Sends players to game
-                  myGame = new MyGame(sides: myPlayers);
+                  myGame =
+                      new MyGame(sides: myPlayers, mapJson: mapSettingsJson);
                   //STARTS THE GAME
                   Navigator.push(
                     context,
