@@ -53,7 +53,7 @@ class _LobbyPageState extends State<LobbyPage> {
                 children: [
                   Expanded(
                     child: Column(children: [
-                      Text("Import a Map"),
+                      Text("Import a Map as JSON"),
                       TextField(
                         onChanged: (value) {
                           mapSettingsJson = value;
