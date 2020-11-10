@@ -39,11 +39,17 @@ class _LobbyPageState extends State<LobbyPage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context)),
+            ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100),
+                padding: const EdgeInsets.symmetric(horizontal: 200),
                 child: ListView.builder(
                   padding: const EdgeInsets.all(10),
                   itemCount: numbOfPlayers,
@@ -59,19 +65,22 @@ class _LobbyPageState extends State<LobbyPage> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                //Sends players to game
-                myGame = new MyGame(sides: myPlayers);
-                //STARTS THE GAME
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GameWrapper(child: myGame.widget),
-                  ),
-                );
-              },
-              child: Text("Start"),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {
+                  //Sends players to game
+                  myGame = new MyGame(sides: myPlayers);
+                  //STARTS THE GAME
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameWrapper(child: myGame.widget),
+                    ),
+                  );
+                },
+                child: Text("Start"),
+              ),
             ),
           ],
         ),
