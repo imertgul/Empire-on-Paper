@@ -27,6 +27,10 @@ class _GameWrapperState extends State<GameWrapper> {
   }
 
   createAlertDialog(BuildContext context) {
+  nextTurn() {
+    playingNowIndex = nextPlayer(playingNowIndex, playerCount);
+    myGame.setPlayNowIndex(playingNowIndex + 2);
+  }
     return showDialog(
       context: context,
       builder: (context) {
@@ -94,11 +98,21 @@ class _GameWrapperState extends State<GameWrapper> {
                   onPressed: () => Navigator.pop(context)),
             ),
             Align(
-              alignment: Alignment.bottomCenter,
-              child: FlatButton(
-                onPressed: () => createAlertDialog(context),
-                child: Text("Place a bet"),
-                color: Colors.white70,
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  color: Colors.black87,
+                  onPressed: () {
+                    setState(() {
+                      nextTurn();
+                    });
+                  },
+                  child: Text(
+                    "Next Turn",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
             ),
             Align(
