@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import '../utilities/constant.dart';
 import 'package:map_game/pages/LobbyPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Game_title",
+                  "Empire on Paper",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -52,9 +53,11 @@ class _HomePageState extends State<HomePage> {
                   options: CarouselOptions(
                     height: 150,
                     viewportFraction: 0.2,
+                    aspectRatio: 10 / 9,
                     enableInfiniteScroll: false,
-                    // enlargeCenterPage: true,
-                    // disableCenter: true,
+                    enlargeCenterPage: true,
+                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                    disableCenter: true,
                   ),
                   carouselController: _controller,
                   items: [
@@ -71,9 +74,23 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      child: Text(
-                        '1v1',
-                        style: TextStyle(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            FontAwesome5.user,
+                            color: Colors.white,
+                          ),
+                          Icon(
+                            MaterialCommunityIcons.sword_cross,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Icon(
+                            FontAwesome5.user,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
                     ),
                     FlatButton(
@@ -89,9 +106,32 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      child: Text(
-                        '1v1v1',
-                        style: TextStyle(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            FontAwesome5.user,
+                            color: Colors.white,
+                          ),
+                          Icon(
+                            MaterialCommunityIcons.sword_cross,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Icon(
+                            FontAwesome5.user,
+                            color: Colors.white,
+                          ),
+                          Icon(
+                            MaterialCommunityIcons.sword_cross,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Icon(
+                            FontAwesome5.user,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
                     ),
                     FlatButton(
@@ -107,22 +147,58 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                FontAwesome5.user,
+                                color: Colors.white,
+                              ),
+                              Icon(
+                                FontAwesome5.user,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          Icon(
+                            MaterialCommunityIcons.sword_cross,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                FontAwesome5.user,
+                                color: Colors.white,
+                              ),
+                              Icon(
+                                FontAwesome5.user,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      // child: Text(
+                      //   'Quart',
+                      //   style: TextStyle(color: Colors.white),
+                      // ),
+                    ),
+                    FlatButton(
+                      color: Colors.black87,
+                      splashColor: Colors.lime,
+                      height: 150,
+                      minWidth: 150,
+                      onPressed: () => print("object"),
                       child: Text(
-                        '1v1v1v1',
+                        'Sandbox',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    // FlatButton(
-                    //   color: Colors.black87,
-                    //   splashColor: Colors.lime,
-                    //   height: 150,
-                    //   minWidth: 150,
-                    //   onPressed: () => print("object"),
-                    //   child: Text(
-                    //     'Sandbox',
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
