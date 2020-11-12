@@ -32,6 +32,19 @@ class _GameWrapperState extends State<GameWrapper> {
     playingNowIndex = nextPlayer(playingNowIndex, playerCount);
     myGame.setPlayNowIndex(playingNowIndex + 2);
   }
+
+  createTossDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Toss"),
+            content: Text("${tossState ? "Heads" : "Tails"}"),
+          );
+        });
+  }
+
+  createBetDialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) {
