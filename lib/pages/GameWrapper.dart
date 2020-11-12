@@ -6,7 +6,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 class GameWrapper extends StatefulWidget {
   final Widget child;
-  GameWrapper({this.child});
+  final int tossAllChance;
+  final int tossWinChance;
+  GameWrapper({this.child, this.tossAllChance = 10, this.tossWinChance = 5});
 
   @override
   _GameWrapperState createState() => _GameWrapperState();
@@ -26,7 +28,6 @@ class _GameWrapperState extends State<GameWrapper> {
     myGame.setPlayNowIndex(playingNowIndex + 2);
   }
 
-  createAlertDialog(BuildContext context) {
   nextTurn() {
     playingNowIndex = nextPlayer(playingNowIndex, playerCount);
     myGame.setPlayNowIndex(playingNowIndex + 2);
@@ -38,7 +39,7 @@ class _GameWrapperState extends State<GameWrapper> {
           title: Text("Place a Bet"),
           content: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 SpinBox(
                   min: 1.0,
@@ -69,7 +70,11 @@ class _GameWrapperState extends State<GameWrapper> {
               color: Colors.black87,
             ),
             FlatButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                tossState = toss(widget.tossAllChance, widget.tossWinChance);
+                createTossDialog(context);
+              },
               child: Icon(AntDesign.check),
               color: Colors.black87,
             ),
@@ -94,7 +99,7 @@ class _GameWrapperState extends State<GameWrapper> {
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: Icon(FontAwesome.arrow_left),
                   onPressed: () => Navigator.pop(context)),
             ),
             Align(
@@ -116,15 +121,17 @@ class _GameWrapperState extends State<GameWrapper> {
               ),
             ),
             Align(
-              alignment: Alignment.topCenter,
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    tossState = toss(10, 5);
-                  });
-                },
-                color: Colors.white70,
-                child: Text("Toss: ${tossState ? "heads" : "tails"}"),
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlatButton(
+                  onPressed: () => createBetDialog(context),
+                  child: Text(
+                    "Place a bet",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.black87,
+                ),
               ),
             ),
             Align(
@@ -135,46 +142,30 @@ class _GameWrapperState extends State<GameWrapper> {
                   height: 30,
                   width: 100,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(3),
                     border: Border.all(
                       color: myGame.sides[playingNowIndex]
                           .color, //                   <--- border color
                       width: 5.0,
                     ),
-                    color: Colors.white70,
+                    color: Colors.black87,
                   ),
-                  child:
-                      Center(child: Text(myGame.sides[playingNowIndex].name)),
+                  child: Center(
+                      child: Text(
+                    myGame.sides[playingNowIndex].name,
+                    style: TextStyle(color: Colors.white),
+                  )),
                 ),
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FlatButton(
-              onPressed: () => myGame.setPlayNowIndex(0), child: Text("0")),
-          FlatButton(
-              onPressed: () => myGame.setPlayNowIndex(1), child: Text("1")),
-          FlatButton(
-            color: Colors.white70,
-            onPressed: () {
-              setState(() {
-                playingNowIndex = nextTurn(playingNowIndex, playerCount);
-                myGame.setPlayNowIndex(playingNowIndex + 2);
-              });
-            },
-            child: Text("Next Turn"),
-          ),
-        ],
-      ),
     );
   }
 }
 
-int nextTurn(int playingNow, int length) {
+int nextPlayer(int playingNow, int length) {
   print("Now: $playingNow , length: $length");
   return playingNow < length - 1 ? playingNow + 1 : 0;
 }
