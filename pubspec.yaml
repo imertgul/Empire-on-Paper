@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_icons: ^1.1.0
+  toggle_switch: ^0.1.8
   carousel_slider: ^2.3.1
   flutter_spinbox: ^0.2.1
   o_color_picker: ^0.1.0

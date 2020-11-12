@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import '../utilities/constant.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class GameWrapper extends StatefulWidget {
   final Widget child;
@@ -24,6 +26,55 @@ class _GameWrapperState extends State<GameWrapper> {
     myGame.setPlayNowIndex(playingNowIndex + 2);
   }
 
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Place a Bet"),
+          content: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                SpinBox(
+                  min: 1.0,
+                  value: 1,
+                  max: 100.0,
+                  decoration: InputDecoration(labelText: 'Area'),
+                  onChanged: (value) => print(value),
+                ),
+                ToggleSwitch(
+                  minWidth: 90.0,
+                  cornerRadius: 20.0,
+                  activeBgColor: Colors.lime,
+                  activeFgColor: Colors.white,
+                  inactiveBgColor: Colors.black87,
+                  inactiveFgColor: Colors.white,
+                  labels: ['Heads', 'Tails'],
+                  onToggle: (index) {
+                    print('switched to: $index');
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Icon(AntDesign.close),
+              color: Colors.black87,
+            ),
+            FlatButton(
+              onPressed: () => Navigator.pop(context),
+              child: Icon(AntDesign.check),
+              color: Colors.black87,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +92,14 @@ class _GameWrapperState extends State<GameWrapper> {
               child: IconButton(
                   icon: Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(context)),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FlatButton(
+                onPressed: () => createAlertDialog(context),
+                child: Text("Place a bet"),
+                color: Colors.white70,
+              ),
             ),
             Align(
               alignment: Alignment.topCenter,
