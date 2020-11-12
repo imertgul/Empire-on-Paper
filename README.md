@@ -28,9 +28,9 @@ Bu projeyi Flutter ve Flame oyun motoru kullanarak geliştirilmeye başladım. K
 # Make sure that everything is ok
 flutter doctor
 # Clone this repository
-git clone https://github.com/imertgul/map_game.git
+git clone https://github.com/imertgul/Empire-on-Paper.git
 # Go into the repository
-cd map_game
+cd Empire-on-Paper
 # Install dependencies
 flutter packages get 
 # Run the app
