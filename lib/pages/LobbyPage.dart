@@ -39,39 +39,63 @@ class _LobbyPageState extends State<LobbyPage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100),
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(10),
-                  itemCount: numbOfPlayers,
-                  itemBuilder: (BuildContext context, int index) {
-                    return PlayerSetter(
-                      index: index,
-                      color: myPlayers[index].color,
-                      onColorSelected: (player) {
-                        myPlayers[index] = player;
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(children: [
+                      Text("Import a Map as JSON"),
+                      TextField(
+                        onChanged: (value) {
+                          mapSettingsJson = value;
+                        },
+                      ),
+                    ]),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(10),
+                      itemCount: numbOfPlayers,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PlayerSetter(
+                          index: index,
+                          color: myPlayers[index].color,
+                          onColorSelected: (player) {
+                            myPlayers[index] = player;
+                          },
+                        );
                       },
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                //Sends players to game
-                myGame = new MyGame(sides: myPlayers);
-                //STARTS THE GAME
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GameWrapper(child: myGame.widget),
-                  ),
-                );
-              },
-              child: Text("Start"),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {
+                  //Sends players to game
+                  myGame =
+                      new MyGame(sides: myPlayers, mapJson: mapSettingsJson);
+                  //STARTS THE GAME
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameWrapper(child: myGame.widget),
+                    ),
+                  );
+                },
+                child: Text("Start"),
+              ),
             ),
           ],
         ),

@@ -13,10 +13,12 @@ class MyGame extends Game with TapDetector {
   int playNowIndex;
   List<Player> sides;
   GameMap myMap;
+  String mapJson;
   List<Color> myColors =
       new List<Color>.filled(2, Colors.black87, growable: true);
 
-  MyGame({@required this.sides, this.playNowIndex = 0}) {
+  MyGame(
+      {@required this.sides, this.playNowIndex = 0, @required this.mapJson}) {
     myColors[0] = Colors.black87;
     myColors[1] = Colors.lime;
     for (var i = 0; i < sides.length; i++) {
@@ -24,7 +26,7 @@ class MyGame extends Game with TapDetector {
     }
     myMap = new GameMap(colors: myColors, screenSize: myScreen);
     // myMap.createMap(fill: 1); //or leave blank to random
-    myMap.setMap(import: jsonDecode(mapSettingsJson)['map']);
+    myMap.setMap(import: jsonDecode(mapJson)['map']);
   }
 
   void setPlayNowIndex(int index) {
@@ -51,12 +53,12 @@ class MyGame extends Game with TapDetector {
   @override
   void onTapUp(TapUpDetails d) {
     print("tap up");
+    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex, base: 0);
   }
 
   @override
   void onTapDown(TapDownDetails d) {
     print("tap down");
-    myMap.tap(d.localPosition.dx, d.localPosition.dy, playNowIndex, base: 0);
   }
 
   @override

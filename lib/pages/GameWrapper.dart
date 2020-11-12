@@ -50,6 +50,7 @@ class _GameWrapperState extends State<GameWrapper> {
                     tossState = toss(10, 5);
                   });
                 },
+                color: Colors.white70,
                 child: Text("Toss: ${tossState ? "heads" : "tails"}"),
               ),
             ),
@@ -61,8 +62,13 @@ class _GameWrapperState extends State<GameWrapper> {
                   height: 30,
                   width: 100,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: myGame.sides[playingNowIndex].color,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                      color: myGame.sides[playingNowIndex]
+                          .color, //                   <--- border color
+                      width: 5.0,
+                    ),
+                    color: Colors.white70,
                   ),
                   child:
                       Center(child: Text(myGame.sides[playingNowIndex].name)),
@@ -80,6 +86,7 @@ class _GameWrapperState extends State<GameWrapper> {
           FlatButton(
               onPressed: () => myGame.setPlayNowIndex(1), child: Text("1")),
           FlatButton(
+            color: Colors.white70,
             onPressed: () {
               setState(() {
                 playingNowIndex = nextTurn(playingNowIndex, playerCount);
