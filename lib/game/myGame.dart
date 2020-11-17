@@ -74,4 +74,8 @@ class MyGame extends Game with TapDetector {
   void onTapCancel() {
     print("tap cancel");
   }
+
+  String exportMap() {
+    return json.encode(myMap.map);
+  }
 }

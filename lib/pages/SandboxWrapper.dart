@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinbox/flutter_spinbox.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import '../utilities/constant.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -18,6 +16,7 @@ class _SandboxWrapperState extends State<SandboxWrapper> {
   int index;
   bool tossState = false;
   int playingNowIndex;
+  TextEditingController controller;
 
   @override
   void initState() {
@@ -26,48 +25,32 @@ class _SandboxWrapperState extends State<SandboxWrapper> {
   }
 
   createBetDialog(BuildContext context) {
+    // controller.text = myGame.exportMap();
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Place a Bet"),
+          title: Text("Export a map"),
           content: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                SpinBox(
-                  min: 1.0,
-                  value: 1,
-                  max: 100.0,
-                  decoration: InputDecoration(labelText: 'Area'),
-                  onChanged: (value) => print(value),
-                ),
-                ToggleSwitch(
-                  minWidth: 90.0,
-                  cornerRadius: 20.0,
-                  activeBgColor: Colors.lime,
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: Colors.black87,
-                  inactiveFgColor: Colors.white,
-                  labels: ['Heads', 'Tails'],
-                  onToggle: (index) {
-                    print('switched to: $index');
-                  },
-                ),
+                Text(myGame.exportMap()),
               ],
             ),
           ),
           actions: <Widget>[
             FlatButton(
               onPressed: () => Navigator.pop(context),
-              child: Icon(AntDesign.close),
+              //TODO COPY CLIPBOARD
+              child: Icon(AntDesign.copy1),
               color: Colors.black87,
             ),
             FlatButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Icon(AntDesign.check),
+              child: Icon(AntDesign.close),
               color: Colors.black87,
             ),
           ],
