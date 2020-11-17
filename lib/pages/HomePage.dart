@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:map_game/game/MyGame.dart';
+import 'package:map_game/models/Player.dart';
+import 'package:map_game/pages/SandboxWrapper.dart';
 import '../utilities/constant.dart';
 import 'package:map_game/pages/LobbyPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -193,7 +196,17 @@ class _HomePageState extends State<HomePage> {
                       splashColor: Colors.lime,
                       height: 150,
                       minWidth: 150,
-                      onPressed: () => print("object"),
+                      onPressed: () {
+                        myGame =
+                            new MyGame(mapJson: mapSettingsJson, sandbox: true);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SandboxWrapper(child: myGame.widget),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Sandbox',
                         style: TextStyle(color: Colors.white),
