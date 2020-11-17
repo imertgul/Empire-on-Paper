@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
-import '../game/myGame.dart';
+import '../game/MyGame.dart';
 
 MyGame myGame;
 
@@ -15,4 +15,9 @@ bool toss(int over, int percent) {
 
 int rollDice(int over) {
   return Random().nextInt(over);
+}
+
+int nextPlayer(int playingNow, int length) {
+  print("Now: $playingNow , length: $length");
+  return playingNow < length - 1 ? playingNow + 1 : 0;
 }

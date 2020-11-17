@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:map_game/models/player.dart';
+import 'package:map_game/models/Player.dart';
 import 'package:o_popup/o_popup.dart';
 import 'package:o_color_picker/o_color_picker.dart';
 

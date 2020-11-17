@@ -1,9 +1,9 @@
-import 'package:map_game/models/player.dart';
+import 'package:map_game/models/Player.dart';
 import 'package:flutter/material.dart';
 import 'package:map_game/widgets/PlayerSetting.dart';
 import '../utilities/constant.dart';
-import '../game/myGame.dart';
-import '../models/player.dart';
+import '../game/MyGame.dart';
+import '../models/Player.dart';
 import 'GameWrapper.dart';
 
 class LobbyPage extends StatefulWidget {
